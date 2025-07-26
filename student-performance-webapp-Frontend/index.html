@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Performance Analysis</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Performance Analysis</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="single.html">Analyze Individual</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="upload.html">Bulk Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header class="hero-section">
+      <div class="container text-center text-white">
+        <h1 class="display-4">Student Performance Analysis</h1>
+        <p class="lead">
+          Utilize Support Vector Machines to analyze student performance with
+          our intuitive web app.
+        </p>
+        <a class="btn btn-primary btn-lg" href="single.html" role="button"
+          >Analyze Individual</a
+        >
+        <a class="btn btn-secondary btn-lg" href="upload.html" role="button"
+          >Bulk Upload</a
+        >
+      </div>
+    </header>
+
+    <section class="overview-section py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Overview of Student Performance Analysis</h2>
+            <p>
+              This web application uses machine learning, specifically Support
+              Vector Machines (SVM), to analyze student performance based on
+              various factors such as demographics, study habits, and
+              extracurricular activities. By understanding these factors, we can
+              help identify areas for improvement and provide targeted support
+              to enhance student outcomes.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="images/analysis.png"
+              width="60%"
+              height="60%"
+              class="img-fluid"
+              alt="Analysis" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="individual-analysis-section py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img
+              src="images/individual.svg"
+              class="img-fluid"
+              alt="Individual Analysis" />
+          </div>
+          <div class="col-md-6">
+            <h2>Analyze Individual Students</h2>
+            <p>
+              To analyze the performance of an individual student, navigate to
+              the "Analyze Individual" page. You'll need to input specific
+              details about the student, including their demographics, study
+              habits, and extracurricular activities. Once submitted, our SVM
+              model will process the data and provide an analysis of the
+              student's performance along with insights on how to improve.
+            </p>
+            <a class="btn btn-primary" href="input.html" role="button"
+              >Analyze Individual</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bulk-analysis-section py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Bulk Upload for Multiple Students</h2>
+            <p>
+              If you have data for multiple students, you can use the bulk
+              upload feature. Navigate to the "Bulk Upload" page and upload a
+              CSV file containing the necessary details for each student. Our
+              system will process each entry and provide a comprehensive
+              analysis for all students in the file. This is especially useful
+              for teachers or administrators who need to analyze performance at
+              a larger scale.
+            </p>
+            <a class="btn btn-secondary" href="upload.html" role="button"
+              >Bulk Upload</a
+            >
+          </div>
+          <div class="col-md-6">
+            <img src="images/bulk.svg" class="img-fluid" alt="Bulk Upload" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="svm-section py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="images/svm.jpg" class="img-fluid" alt="SVM" />
+          </div>
+          <div class="col-md-6">
+            <h2>What is Support Vector Machines (SVM)?</h2>
+            <p>
+              Support Vector Machines (SVM) are supervised learning models used
+              for classification and regression analysis. They are effective in
+              high-dimensional spaces and are commonly used in applications like
+              this to analyze and predict outcomes based on input data. SVMs
+              work by finding the hyperplane that best separates the data into
+              different classes, ensuring accurate and reliable performance
+              predictions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-light text-center text-lg-start">
+      <div class="container p-4">
+        <p>&copy; 2024 Student Performance Analysis</p>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

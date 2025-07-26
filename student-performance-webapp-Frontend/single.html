@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analyze Individual Student</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">Performance Analysis</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="single.html">Analyze Individual</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="upload.html">Bulk Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Analyze Individual Student</h2>
+      <div class="card mx-auto" style="max-width: 600px">
+        <div class="card-body">
+          <form id="studentForm">
+            <div class="form-group">
+              <label for="studentID">Student ID</label>
+              <input
+                type="number"
+                class="form-control"
+                id="studentID"
+                name="studentID"
+                required />
+            </div>
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input
+                type="number"
+                class="form-control"
+                id="age"
+                name="age"
+                required />
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select class="form-control" id="gender" name="gender" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ethnicity">Ethnicity</label>
+              <select
+                class="form-control"
+                id="ethnicity"
+                name="ethnicity"
+                required>
+                <option value="0">Caucasian</option>
+                <option value="1">African American</option>
+                <option value="2">Asian</option>
+                <option value="3">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="parentalEducation">Parental Education</label>
+              <select
+                class="form-control"
+                id="parentalEducation"
+                name="parentalEducation"
+                required>
+                <option value="0">None</option>
+                <option value="1">High School</option>
+                <option value="2">Some College</option>
+                <option value="3">Bachelor's</option>
+                <option value="4">Higher</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="studyTimeWeekly">Study Time Weekly (hours)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="studyTimeWeekly"
+                name="studyTimeWeekly"
+                required />
+            </div>
+            <div class="form-group">
+              <label for="absences">Number of Absences</label>
+              <input
+                type="number"
+                class="form-control"
+                id="absences"
+                name="absences"
+                required />
+            </div>
+            <div class="form-group">
+              <label for="tutoring">Tutoring</label>
+              <select
+                class="form-control"
+                id="tutoring"
+                name="tutoring"
+                required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="parentalSupport">Parental Support</label>
+              <select
+                class="form-control"
+                id="parentalSupport"
+                name="parentalSupport"
+                required>
+                <option value="0">None</option>
+                <option value="1">Low</option>
+                <option value="2">Moderate</option>
+                <option value="3">High</option>
+                <option value="4">Very High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="extracurricular">Extracurricular Activities</label>
+              <select
+                class="form-control"
+                id="extracurricular"
+                name="extracurricular"
+                required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sports">Participation in Sports</label>
+              <select class="form-control" id="sports" name="sports" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="music">Participation in Music</label>
+              <select class="form-control" id="music" name="music" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="volunteering">Participation in Volunteering</label>
+              <select
+                class="form-control"
+                id="volunteering"
+                name="volunteering"
+                required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Analyze
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

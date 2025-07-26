@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+.venv*/
+venv*/
+__pycache__/
+dist/
+.coverage*
+.DS_Store
+htmlcov/
+.tox/
+docs/_build/
+instance/
+.webassets-cache

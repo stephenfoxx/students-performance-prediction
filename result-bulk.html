@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulk Upload Results</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/buttons/3.1.0/css/buttons.dataTables.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.1.0/css/dataTables.dataTables.css"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Include Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- For PDF export -->
+    <script src="jspdf.min.js"></script>
+    <script src="jspdf.plugin.autotable.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">Performance Analysis</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="single.html">Analyze Individual</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="upload.html">Bulk Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-5 px-2">
+      <h2 class="text-center mb-4">Bulk Upload Results</h2>
+
+      <div id="tableContainer" class="table-responsive">
+        <div class="text-left mt-4 mb-2">
+          <button
+            id="exportCsvBtn"
+            class="btn btn-primary mr-3"
+            onclick="exportTableToCsv('table')"
+          >
+            Export as CSV
+          </button>
+          <button
+            id="exportPdfBtn"
+            class="btn btn-primary"
+            onclick="exportTableToPdf()"
+          >
+            Export as PDF
+          </button>
+        </div>
+
+        <table id="dataTable" class="table table-striped display wrap">
+          <thead>
+            <tr>
+              <!-- <th>studentID</th> -->
+              <th>StudentID</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Ethnicity</th>
+              <th>Parental Education</th>
+              <th>Study Time Weekly</th>
+              <th>Absences</th>
+              <th>Tutoring</th>
+              <th>Parental Support</th>
+              <th>Extracurricular</th>
+              <th>Sports</th>
+              <th>Music</th>
+              <th>Volunteering</th>
+              <th>Predicted Grade Class</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody">
+            <!-- Results will be dynamically added here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="chartContainer" class="mt-5">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="result-bulk.js"></script>
+
+    <script>
+      // Sample data (replace with actual data processing)
+
+      // Function to display results in a table
+      // function displayResults() {
+      //   const resultBody = document.getElementById("resultBody");
+      //   resultBody.innerHTML = "";
+
+      //   studentsData.forEach((student) => {
+      //     const row = `
+      //               <tr>
+      //                   <td>${student.id}</td>
+      //                   <td>${student.name}</td>
+      //                   <td>${student.gpa}</td>
+      //                   <td>${student.age}</td>
+      //                   <td>${student.gender}</td>
+      //                   <td>${student.ethnicity}</td>
+      //               </tr>
+      //           `;
+      //     resultBody.innerHTML += row;
+      //   });
+
+      //   // Call function to render charts
+      //   renderCharts();
+      // }
+
+      // // Function to render charts using Chart.js
+      // function renderCharts() {
+      //   const ctx = document.getElementById("myChart").getContext("2d");
+      //   // const labels = studentsData.map((student) => `Student ${student.id}`);
+      //   // const gpas = studentsData.map((student) => student.gpa);
+
+      //   const myChart = new Chart(ctx, {
+      //     type: "bar",
+      //     data: {
+      //       labels: labels,
+      //       datasets: [
+      //         {
+      //           label: "GPA",
+      //           data: gpas,
+      //           backgroundColor: "rgba(54, 162, 235, 0.2)",
+      //           borderColor: "rgba(54, 162, 235, 1)",
+      //           borderWidth: 1,
+      //         },
+      //       ],
+      //     },
+      //     options: {
+      //       scales: {
+      //         yAxes: [
+      //           {
+      //             ticks: {
+      //               beginAtZero: true,
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     },
+      //   });
+      // }
+
+      const BulkResultPrediction = sessionStorage.getItem(
+        "BulkpredictionResult"
+      );
+      const savedBulkPredictedData = JSON.parse(
+        BulkResultPrediction.replace(/"(\w+)"\s*:/g, '"$1":')
+      );
+
+      if (BulkResultPrediction) {
+        console.log(typeof savedBulkPredictedData);
+        console.log(BulkResultPrediction);
+      } else {
+        window.location.href = "upload.html";
+      }
+
+      // Function to populate the table
+      function populateTable(data) {
+        const tableBody = document.getElementById("resultBody");
+        tableBody.innerHTML = ""; // Clear existing rows
+
+        // Functions handling the values coming from the Bulk Prediction Array
+        function getGenderString(genderValue) {
+          if (genderValue === 0) {
+            return "Male";
+          } else if (genderValue === 1) {
+            return "Female";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function getEthnicityString(ethnicValue) {
+          if (ethnicValue === 0) {
+            return "Caucasian";
+          } else if (ethnicValue === 1) {
+            return "African American";
+          } else if (ethnicValue === 2) {
+            return "Asian";
+          } else if (ethnicValue === 3) {
+            return "Other";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function getParentEducationString(ParentEValue) {
+          if (ParentEValue === 0) {
+            return "None";
+          } else if (ParentEValue === 1) {
+            return "High School";
+          } else if (ParentEValue === 2) {
+            return "Some College";
+          } else if (ParentEValue === 3) {
+            return "Bachelor's";
+          } else if (ParentEValue === 4) {
+            return "Higher";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function getParentSupportString(ParentSValue) {
+          if (ParentSValue === 0) {
+            return "None";
+          } else if (ParentSValue === 1) {
+            return "Low";
+          } else if (ParentSValue === 2) {
+            return "Moderate";
+          } else if (ParentSValue === 3) {
+            return "High";
+          } else if (ParentSValue === 4) {
+            return "Very High";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function getTutorString(TutorValue) {
+          if (TutorValue === 0) {
+            return "No";
+          } else if (TutorValue === 1) {
+            return "Yes";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function getExtracurricularString(ExtracurricularValue) {
+          if (ExtracurricularValue === 0) {
+            return "No";
+          } else if (ExtracurricularValue === 1) {
+            return "Yes";
+          } else {
+            return "Unknown";
+          }
+        }
+        function getSportsString(SprotsValue) {
+          if (SprotsValue === 0) {
+            return "No";
+          } else if (SprotsValue === 1) {
+            return "Yes";
+          } else {
+            return "Unknown";
+          }
+        }
+        function getMusicString(MusicValue) {
+          if (MusicValue === 0) {
+            return "No";
+          } else if (MusicValue === 1) {
+            return "Yes";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function getVolunteeringString(VolunteerValue) {
+          if (VolunteerValue === 0) {
+            return "No";
+          } else if (VolunteerValue === 1) {
+            return "Yes";
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function ApproximateStudyTime(StudyTime) {
+          if (StudyTime) {
+            return Math.round(StudyTime);
+          } else {
+            return "Unknown";
+          }
+        }
+
+        function Prediction(PredictionValue) {
+          if (PredictionValue === 0) {
+            return "A";
+          } else if (PredictionValue === 1) {
+            return "B";
+          } else if (PredictionValue === 2) {
+            return "C";
+          } else if (PredictionValue === 3) {
+            return "D";
+          } else if (PredictionValue === 4) {
+            return "F";
+          } else {
+            return "Unknown ";
+          }
+        }
+
+        savedBulkPredictedData.map((BulkResult) => {
+          // Storing the functions in Variables
+          const gender = getGenderString(BulkResult.Gender);
+
+          const Ethnicity = getEthnicityString(BulkResult.Ethnicity);
+
+          const ParentEducation = getParentEducationString(
+            BulkResult.ParentalEducation
+          );
+
+          const Tutor = getTutorString(BulkResult.Tutoring);
+          const ParentSupport = getParentSupportString(
+            BulkResult.ParentalSupport
+          );
+
+          const Extracurricular = getExtracurricularString(
+            BulkResult.Extracurricular
+          );
+
+          const ApproxStudyTime = ApproximateStudyTime(
+            BulkResult.StudyTimeWeekly
+          );
+
+          const Sports = getSportsString(BulkResult.Sports);
+
+          const Music = getMusicString(BulkResult.Music);
+
+          const PredictionGrade = Prediction(BulkResult.Predictions);
+
+          const Volunteering = getVolunteeringString(BulkResult.Volunteering);
+          // Create a new row
+          const row = document.createElement("tr");
+
+          // Populate the row with data
+          row.innerHTML = `
+          <td>${BulkResult.StudentID}</td>
+          <td>${BulkResult.Age}</td>
+            <td>${gender}</td>
+            <td>${Ethnicity}</td>
+            <td>${ParentEducation}</td>
+            <td>${ApproxStudyTime} hour(s)</td>
+            <td>${BulkResult.Absences} time(s)</td>
+            <td>${Tutor}</td>
+            <td>${ParentSupport}</td>
+            <td>${Extracurricular}</td>
+            <td>${Sports}</td>
+            <td>${Music}</td>
+            <td>${Volunteering}</td>
+            <td>${BulkResult.PredictedGradeClass}</td>
+        `;
+
+          tableBody.appendChild(row);
+        });
+        renderCharts();
+      }
+
+      // Function to render charts using Chart.js
+      function renderCharts() {
+        const ctx = document.getElementById("myChart").getContext("2d");
+        const labels = savedBulkPredictedData.map(
+          (student) => `Student ${student.StudentID}`
+        );
+        const Predictions = savedBulkPredictedData.map(
+          (student) => student.Predictions
+        );
+
+        const myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Student's Grade",
+                data: Predictions,
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function (value) {
+                      // Define the mapping from numeric values to letter grades
+                      const gradeMap = {
+                        0: "A",
+                        1: "B",
+                        2: "C",
+                        3: "D",
+                        4: "F",
+                      };
+
+                      // Return the corresponding letter grade or the numeric value if not mapped
+                      return gradeMap[value] !== undefined
+                        ? gradeMap[value]
+                        : value;
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        });
+      }
+
+      // Call the function with your JSON data
+      populateTable(BulkResultPrediction);
+
+      // Event listener for export buttons (replace with actual export functionality)
+      document
+        .getElementById("exportCsvBtn")
+        .addEventListener("click", function () {
+          alert("Exporting as CSV...");
+        });
+
+      document
+        .getElementById("exportPdfBtn")
+        .addEventListener("click", function () {
+          alert("Exporting as PDF...");
+        });
+    </script>
+  </body>
+</html>

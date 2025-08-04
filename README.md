@@ -20,3 +20,6 @@ The frontend of the Student Performance Web App is designed to provide an intuit
 3. Charting Libraries: Libraries such as Chart.js are utilized to create interactive charts and graphs that represent student performance data effectively.
 
 The combination of these technologies ensures that the Student Performance Web App’s frontend delivers a seamless and engaging experience for users, allowing them to interact with and analyze student performance data efficiently.
+
+## find link to web page here
+https://students-performance-prediction-mk1.vercel.app/
